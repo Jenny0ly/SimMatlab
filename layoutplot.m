@@ -1,0 +1,11 @@
+function layoutplot(W,B,Q1,Q2)
+    plot3([W(1) B(1)],[W(2) B(2)],[W(3) B(3)],'--')
+    text(1,1,0.5,'\leftarrow Pb')
+    plot3([W(1) Q1(1)],[W(2) Q1(2)],[W(3) Q1(3)],'--')
+    text(0.2,1.5,0.5,'Pq1 \rightarrow')
+    plot3([W(1) Q2(1)],[W(2) Q2(2)],[W(3) Q2(3)],'--')
+    text(2,1.5,0.5,'\leftarrow Pq2')
+    text(B(1)-0.3,B(2),B(3)+1.4, 'CoM')
+    text(Q1(1)-0.3,Q1(2),Q1(3)+1.4, 'quad1')
+    text(Q2(1)-0.3,Q2(2),Q2(3)+1.4, 'quad2')
+end

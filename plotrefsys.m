@@ -3,7 +3,7 @@ xb_axis = wRb(:,1);
 yb_axis = wRb(:,2);
 zb_axis = wRb(:,3);
 %p is location of payload CoM
-plot3(p(1),p(2),p(3),'o')
+plot3(p(1),p(2),p(3),'o','Color','k','LineWidth',0.5)
 hold on
 xlabel('x [m]')
 ylabel('y [m]')
