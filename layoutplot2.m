@@ -1,4 +1,4 @@
-function layoutplot(W,B,Q1,Q2)
+function layoutplot2(W,B,Q1,Q2)
     plot3([W(1) B(1)],[W(2) B(2)],[W(3) B(3)],'--')
     text(1,1,0.5,'\leftarrow Pb')
     plot3([W(1) Q1(1)],[W(2) Q1(2)],[W(3) Q1(3)],'--')
