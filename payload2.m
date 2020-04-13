@@ -1,4 +1,4 @@
-function [wRb,bRq1] = payload2(Eb,wRq1)
+function [wRb,bRq] = payload2(Eb,wRq)
 %% Euler angles (roll, pitch, yaw) payload
     sentence6 = ['Angles of Payload: ', num2str(Eb')];
     disp(sentence6);
@@ -26,7 +26,7 @@ function [wRb,bRq1] = payload2(Eb,wRq1)
     ry = [cy 0 sy;0 1 0;-sy 0 cy];
     rz = [cz -sz 0;sz cz 0;0 0 1];
     %Rotation matrix from W to B
-    bRq1 = rz*rx*ry;
+    bRq = rz*rx*ry;
 
 
 %% rotation matrix from known orientation wrt drone1 
@@ -40,7 +40,7 @@ function [wRb,bRq1] = payload2(Eb,wRq1)
     ry = [cy 0 sy;0 1 0;-sy 0 cy];
     rz = [cz -sz 0;sz cz 0;0 0 1];
     %Rotation matrix from W to B
-    q1Rb = rz*rx*ry;
+    qRb = rz*rx*ry;
     
-      wRb = wRq1*q1Rb;
+      wRb = wRq*qRb;
 end

@@ -1,25 +1,26 @@
-function [ddrB,yawT,rT] = Settrajectory(B,Euler1,rB,drB)
+function [ddrB,yawT,rT] = Settrajectory(B,Euler,rB,drB,z_f,K)
 global t tf tm 
+m_p = (z_f-B(3))/tm;
     if t <= tm
         xdes = B(1);
         ydes = B(2);
-        zdes = 0.2*t+B(3);
+        zdes = m_p*t+B(3);
     else 
         xdes = B(1);
         ydes = B(2);
-        zdes = 0.2*tm+B(3);
+        zdes = m_p*tm+B(3);
     end
 
     rT = [xdes;ydes;zdes];
-    yawT = Euler1(3); %desired yaw angle
+    yawT = Euler(3); %desired yaw angle
     %position control
-    [ddrB] = desiredacc(rT,rB,drB);
+    [ddrB] = desiredacc(rT,rB,drB,K);
 end
 
 
-function [ddrB] = desiredacc(rT,rB,drB) %100Hz
+function [ddrB] = desiredacc(rT,rB,drB,K) %100Hz
 global tm t 
-kp = 10;kd = 0.5;
+kp = K(1);kd = K(2);
     %3Dtrajectory control 
     if t<=tm 
         drT = [0;0;0.2];

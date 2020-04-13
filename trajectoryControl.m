@@ -1,7 +1,7 @@
-function [udes,Edes] = trajectoryControl(ddrB,yawT,wb,Eb,Edes_ant)
+function [udes,Edes] = trajectoryControl(ddrB,yawT,wb,Eb,Edes_ant,mass)
 global dt
 
-    [Edes,Fdes] = position_control (ddrB,yawT);
+    [Edes,Fdes] = position_control (ddrB,yawT,mass);
     %attitude control 
     wbdes = ((Edes-Edes_ant)/dt);
     [Mxdes,Mydes,Mzdes] = attitude(Eb,Edes,wb,wbdes);
@@ -28,14 +28,14 @@ kpz = 0.5;kdz = 0.5;
     Mzdes = kpz*(Edes(3)-Eb(3)) + kdz*(wbdes(3)-wb(3));
 end
 
-function [Edes,Fdes] = position_control (ddrB,yawT) %100Hz
-global g masst
+function [Edes,Fdes] = position_control (ddrB,yawT,mass) %100Hz
+global g 
     
     %desired angles and force
     phides = 1/g*(ddrB(1)*sind(yawT)-ddrB(2)*cosd(yawT));
     thetades = 1/g*(ddrB(1)*cosd(yawT)+ddrB(2)*sin(yawT));
     yawdes = yawT;
-    Fdes = masst*(ddrB(3)+g);
+    Fdes = mass*(ddrB(3)+g);
 
     Edes = [phides;thetades;yawdes];
     

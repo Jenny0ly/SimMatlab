@@ -1,16 +1,4 @@
-function [wdes,u_law] = control2(A,L,udes)
-    %H matrix weights
-    wF  = 0.3;wMxy = 0.4;wMz = 0.2;
-    wF1 = wF;wMx1 = wMxy;wMy1 = wMxy;wMz1 = wMz;
-    wF2 = wF;wMx2 = wMxy;wMy2 = wMxy;wMz2 = wMz;
-    v = [sqrt(wF1) sqrt(wMx1) sqrt(wMy1) sqrt(wMz1)...
-         sqrt(wF2) sqrt(wMx2) sqrt(wMy2) sqrt(wMz2)];
-    H = diag(v);
-    %matrix (8) in mellinger's paper
-    mA = A*H^-2*A';
-    %input
-    u = H^-2*A'*inv(mA);
-    
+function [wdes,u_law] = control2(u,L,udes)
     %optimal input
     u_law = u*udes;
     %with u_law calculate now wdes para implementar en el sistema
